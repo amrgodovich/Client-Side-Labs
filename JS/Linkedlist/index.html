@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LinkedList</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    input, button { margin: 5px; padding: 5px; }
+    #list { margin-top: 20px; display: flex; align-items: center; flex-wrap: wrap; }
+    .node {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: lightblue;
+      display: flex; justify-content: center; align-items: center;
+      margin: 5px;
+    }
+    .arrow {
+      margin: 0 5px;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>LinkedList</h2>
+  
+  <input type="text" id="valueInput" placeholder="Enter value">
+  <button onclick="addValue()">Push</button>
+  <button onclick="removeValue()">Pop</button>
+  <button onclick="showLength()">Length</button>
+  
+  <div id="list"></div>
+  <div id="info"></div>
+  
+  <script>
+    class Node {
+      constructor(value) {
+        this.value = value;
+        this.next = null;
+      }
+    }
+
+    class LinkedList {
+      constructor() {
+        this.head = null;
+        this.size = 0;
+      }
+
+      push(value) {
+        let node = new Node(value);
+        if (!this.head) {
+          this.head = node;
+        } else {
+          let current = this.head;
+          while (current.next) {
+            current = current.next;
+          }
+          current.next = node;
+        }
+        this.size++;
+      }
+
+      pop() {
+        if (!this.head) return null;
+        if (!this.head.next) {
+          let val = this.head.value;
+          this.head = null;
+          this.size--;
+          return val;
+        }
+        let current = this.head;
+        let prev = null;
+        while (current.next) {
+          prev = current;
+          current = current.next;
+        }
+        prev.next = null;
+        this.size--;
+        return current.value;
+      }
+
+      length() {
+        return this.size;
+      }
+
+      toArray() {
+        let arr = [];
+        let current = this.head;
+        while (current) {
+          arr.push(current.value);
+          current = current.next;
+        }
+        return arr;
+      }
+    }
+
+    let list = new LinkedList();
+
+    function updateDisplay() {
+      let container = document.getElementById("list");
+      container.innerHTML = "";
+      let values = list.toArray();
+
+      values.forEach((val, idx) => {
+        let node = document.createElement("div");
+        node.className = "node";
+        node.innerText = val;
+        container.appendChild(node);
+        if (idx < values.length - 1) {
+          let arrow = document.createElement("span");
+          arrow.className = "arrow";
+          arrow.innerText = "→";
+          container.appendChild(arrow);
+        }
+      });
+    }
+
+    function addValue() {
+      let value = document.getElementById("valueInput").value;
+      if (value === "") return;
+      list.push(value);
+      updateDisplay();
+      document.getElementById("valueInput").value = "";
+    }
+
+    function removeValue() {
+      let val = list.pop();
+      document.getElementById("info").innerText = val !== null ? "Popped: " + val : "List is empty!";
+      updateDisplay();
+    }
+
+    function showLength() {
+      document.getElementById("info").innerText = "Length: " + list.length();
+    }
+  </script>
+</body>
+</html>

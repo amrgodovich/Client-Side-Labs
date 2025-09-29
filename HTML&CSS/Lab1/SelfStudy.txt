@@ -1,0 +1,5 @@
+How to optimize your website for search engines?
+
+1-adding meta descriptions.
+2-including alt attributes for images.
+3-Structured Data to make reachable and easier for engines to understand the info.

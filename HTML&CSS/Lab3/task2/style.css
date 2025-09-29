@@ -1,0 +1,10 @@
+p, div ,span {
+    font-family: 'Lucida Calligraphy';
+   justify-content: center;
+}
+
+div > h1 {
+ text-align: center;
+ 
+}
+

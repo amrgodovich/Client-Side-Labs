@@ -1,0 +1,38 @@
+/* 
+
+1-     Em: used in nested elements, and it equals the font size of the parent once, when a child uses it like: 2em, it means twice the parent size.
+       Rem: used anywhere, it equal the root html characteristics in css font size.. and it is used like (2rem, 3rem,,etc) as well.
+*/
+
+p {
+    color: red;
+  }
+  
+  p, div {
+    color: red;
+  }
+  
+  #myDiv > p.mainClass {
+    font-weight: bold;
+  }
+  
+  div p {
+    font-weight:lighter;
+  }
+  
+  input[type="text"].myClass {
+    border: blue;
+  }
+  
+  div + span {
+    font-weight:lighter;
+  }
+  
+  p.myClass {
+    font-size: 10px;
+  }
+  
+  #myDiv {
+    background-color: cyan;
+  }
+  

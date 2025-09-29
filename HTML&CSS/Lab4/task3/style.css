@@ -1,0 +1,25 @@
+body {
+    margin: 20px;
+    background-color: white;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .card {
+    background-color: rgb(231, 231, 231);
+    float: left;
+    width: 30%; 
+    margin: 0 1% 1% 1%;
+  }
+
+  .card img {
+    width: 100%;
+    height: 200px;
+  }
+
+  .content {
+    padding: 15px;
+  }

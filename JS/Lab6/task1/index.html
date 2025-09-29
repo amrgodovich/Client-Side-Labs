@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 20px;
+        }
+
+        table{
+            width: 100%;
+        }
+
+        th,td{
+            padding: 10px;
+            text-align: center;
+            border: 1px solid;
+        }
+
+        th{
+            cursor: pointer;
+            background-color: #f5f5f5;
+        }
+
+        th:hover{
+            background-color: #e5e5e5;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th onclick="sorttt(0)">Name</th>
+                <th onclick="sorttt(1)">Position</th>
+                <th onclick="sorttt(2)">Office</th>
+                <th onclick="sorttt(3)">Age</th>
+                <th onclick="sorttt(4)">Start date</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+
+    <script>
+        let employees = [
+            {name: "Airi Satou", position: "Accountant", office: "Tokyo", age: 33, startDate: "2008/11/28"},
+            {name: "Angelica Ramos", position: "Chief Executive Officer (CEO)", office: "London", age: 47, startDate: "2009/10/09"},
+            {name: "Ashton Cox", position: "Junior Technical Author", office: "San Francisco", age: 66, startDate: "2009/01/12"},
+            {name: "Bradley Greer", position: "Software Engineer", office: "London", age: 41, startDate: "2012/10/13"},
+            {name: "Brenden Wagner", position: "Software Engineer", office: "San Francisco", age: 28, startDate: "2011/06/07"},
+            {name: "Brielle Williamson", position: "Integration Specialist", office: "New York", age: 61, startDate: "2012/12/02"},
+            {name: "Bruno Nash", position: "Software Engineer", office: "London", age: 38, startDate: "2011/05/03"},
+            {name: "Caesar Vance", position: "Pre-Sales Support", office: "New York", age: 21, startDate: "2011/12/12"},
+            {name: "Cara Stevens", position: "Sales Assistant", office: "New York", age: 46, startDate: "2011/12/06"},
+            {name: "Cedric Kelly", position: "Senior Javascript Developer", office: "Edinburgh", age: 22, startDate: "2012/03/29"}
+        ];
+
+        let asc=true;
+
+        let tbody = document.getElementById('tableBody');
+        employees.forEach(emp => {
+        tbody.innerHTML += `
+                <tr>
+                    <td>${emp.name}</td>
+                    <td>${emp.position}</td>
+                    <td>${emp.office}</td>
+                    <td>${emp.age}</td>
+                    <td>${emp.startDate}</td>
+                </tr>
+            `;
+        });
+
+
+        function sorttt(ind) {
+            let table = document.querySelector('tbody');
+            let rows = Array.from(table.rows);
+            
+            asc = !asc;
+            
+            rows.sort((a, b) => {
+                let x = a.cells[ind].innerText.trim();
+                let y = b.cells[ind].innerText.trim();
+                let aVal = x;
+                let bVal = y;
+                
+                if(typeof aval =="string" && typeof aval =="string"){
+                    aVal = aval.toLowerCase();
+                    bVal = bVal.toLowerCase();
+                }
+
+
+                // number
+                if (!isNaN(x) && !isNaN(y)) {
+                    aVal = parseFloat(x);
+                    bVal = parseFloat(y);
+                }
+                
+                // date
+                if (x.includes('/') && y.includes('/')) {
+                    aVal = new Date(x);
+                    bVal = new Date(y);
+                }
+                
+                if (aVal > bVal){
+                    if (asc){
+                        return 1;
+                    }
+                    else{ return -1;}
+                }
+                if (aVal < bVal){
+                    if (asc){
+                        return -1;
+                    }
+                    else{ return 1;}
+                }
+                return 0;
+            });
+            rows.forEach(row => table.appendChild(row));
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>task3</h1>
+</body>
+<script>
+function emp(name) {
+    this.name = name;
+   }
+   function dev(name, job) {
+    emp.call(this, name);
+    this.job = job;
+   }
+
+   dev.prototype = Object.create(emp.prototype);
+   dev.prototype.constructor = dev;
+
+   var my = new dev("Amr", "DS");
+   console.log(my.name);
+   console.log(my.job); 
+</script>
+</html>

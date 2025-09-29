@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+}
+body {
+    padding-top: 56px; 
+}
+#navbar {
+    width: 400px;
+    background: rgb(53, 48, 48);
+    z-index: 999;
+    position: fixed;
+    border: 2px solid red;
+}
+
+ul {
+    color: azure;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    /* display: block; */
+    padding: 10px 16px;
+    text-align: left;
+    background-color: rgb(53, 48, 48); 
+}
+
+li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+
+li:hover {
+    background-color: red;

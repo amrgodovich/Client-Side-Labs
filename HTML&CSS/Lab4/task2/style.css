@@ -1,0 +1,25 @@
+.bigcontainer{
+    position: relative;
+    margin:0 auto;
+    display: inline-block;
+}
+#main{
+    margin: 0;
+    height: auto;
+    width: 100%;
+}
+
+#textbox {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+    color: aliceblue;
+    z-index: 999;
+    background-color: rgba(59, 59, 59, 0.555);
+    text-align: left;
+    padding: 10px;
+    max-width: 300px;
+    border-radius: 5px;
+    height: 70px;
+}

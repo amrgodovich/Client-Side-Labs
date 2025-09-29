@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linked List</title>
+    <style>
+        *{
+            margin: 10px;
+        }
+        #output {
+             margin: 10px;
+             padding: 10px;
+             border: 1px solid #ccc;
+             height: 30px; 
+            }
+        input { margin: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Linked List</h1>
+    <div>
+        <input type="number" id="addValue" placeholder="Value to add">
+        <button onclick="addNode()">Add</button>
+    </div>
+    <div>
+        <input type="number" id="delValue" placeholder="Value to delete">
+        <button onclick="deleteNode()">Delete</button>
+    </div>
+    <div>
+        <button onclick="printList()">Print List</button>
+    </div>
+    <div id="output"></div>
+</body>
+<script>
+    function Node(value) {
+        this.value = value;
+        this.next = null;
+    }
+
+    function LinkedList() {
+        this.head = null;
+    };
+    let list = new LinkedList();
+    LinkedList.prototype.append = function(value) {
+        const newNode = new Node(value);
+        if (!this.head) {
+            this.head = newNode;
+            return;
+        }
+        let curr_node = this.head;
+        while (curr_node.next) {
+            curr_node = curr_node.next;
+        }
+        curr_node.next = newNode;
+    };
+
+    LinkedList.prototype.print = function() {
+        let curr_node = this.head;
+        let values = [];
+        while (curr_node) {
+            values.push(curr_node.value);
+            curr_node = curr_node.next;
+        }
+        return values;
+    };
+
+    LinkedList.prototype.delete = function(value) {
+        let curr_node = this.head;
+        let past_node = null;
+        if (!curr_node) return false;
+        if (curr_node.value == value) {
+            this.head = curr_node.next;
+            return true;
+        }
+        while (curr_node && curr_node.value !== value) {
+            past_node = curr_node;
+            curr_node = curr_node.next;
+        }
+        if (curr_node && curr_node.value == value) {
+            past_node.next = curr_node.next;
+            return true;
+        }
+        return false;
+    };
+
+
+    function addNode() {
+        const val = document.getElementById('addValue').value;
+        if (val === "") return;
+        list.append(Number(val));
+        document.getElementById('addValue').value = "";
+        printList();
+    }
+
+    function deleteNode() {
+        const val = document.getElementById('delValue').value;
+        if (val === "") return;
+        const deleted = list.delete(Number(val));
+        document.getElementById('delValue').value = "";
+        if (!deleted) {
+            document.getElementById('output').innerText = "Value not found!";
+        } else {
+            printList();
+        }
+    }
+
+    function printList() {
+        const output = list.print();
+        document.getElementById('output').innerText = output || "List is empty.";
+    }
+</script>
+</html>
